@@ -16,6 +16,7 @@
             <div class="text-xl font-bold text-indigo-600">Pendaftaran</div>
             <div>
                 <a href="/status" class="text-sm text-gray-700 hover:text-indigo-600">Status</a>
+                <a href="/profile" class="text-sm text-gray-700 hover:text-indigo-600">Profile</a>
             </div>
         </div>
     </nav>
