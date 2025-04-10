@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
     {
         $userData = [
             [
-                'name' => 'user',
+                'name' => 'admin',
                 'email' => 'admin@gmail.com',
                 'role' => 'admin',
                 'password' => bcrypt('admin'),
@@ -26,12 +26,7 @@ class UserSeeder extends Seeder
                 'role' => 'user',
                 'password' => bcrypt('user'),
             ],
-            [
-                'name' => 'petugas',
-                'email' => 'petugas@gmail.com',
-                'role' => 'petugas',
-                'password' => bcrypt('petugas'),
-            ],
+
         ];
 
         foreach ($userData as $key => $val) {

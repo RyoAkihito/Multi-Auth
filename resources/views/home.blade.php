@@ -1,64 +1,115 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pendaftaran Siswa</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 text-gray-900">
+
+<body class="bg-gray-100 text-gray-800 min-h-screen flex flex-col">
 
     <!-- Navbar -->
-    <nav class="bg-blue-600 text-white p-4">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-xl font-bold">WebsiteKu</h1>
-            <ul class="flex space-x-4">
-                <li><a href="#" class="hover:underline">Home</a></li>
-                <li><a href="#" class="hover:underline">Tentang</a></li>
-                <li><a href="#" class="hover:underline">Kontak</a></li>
-            </ul>
-            <!-- Tombol Logout -->
-            <form action="{{ route('logout') }}" method="POST">
-                @csrf
-                <button type="submit" class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded text-white font-semibold">
-                    Logout
-                </button>
-            </form>
+    <nav class="bg-white shadow">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-xl font-bold text-indigo-600">Pendaftaran</div>
+            <div>
+                <a href="/status" class="text-sm text-gray-700 hover:text-indigo-600">Status</a>
+            </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="text-center py-20 bg-blue-500 text-white">
-        <h2 class="text-4xl font-bold">Selamat Datang di WebsiteKu</h2>
-        <p class="mt-4 text-lg">Tempat terbaik untuk mendapatkan informasi terkini</p>
-        <a href="#" class="mt-6 inline-block bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200">
-            Pelajari Lebih Lanjut
-        </a>
-    </section>
-
-    <!-- Konten -->
-    <section class="container mx-auto p-6">
-        <h3 class="text-2xl font-bold text-center">Fitur Utama</h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-            <div class="bg-white p-4 shadow rounded-lg text-center">
-                <h4 class="text-lg font-semibold">Cepat & Responsif</h4>
-                <p class="mt-2 text-gray-600">Website ini dirancang untuk kecepatan dan kemudahan akses.</p>
-            </div>
-            <div class="bg-white p-4 shadow rounded-lg text-center">
-                <h4 class="text-lg font-semibold">Desain Modern</h4>
-                <p class="mt-2 text-gray-600">Menggunakan teknologi terbaru dengan tampilan menarik.</p>
-            </div>
-            <div class="bg-white p-4 shadow rounded-lg text-center">
-                <h4 class="text-lg font-semibold">Mudah Digunakan</h4>
-                <p class="mt-2 text-gray-600">Navigasi yang simpel untuk pengalaman pengguna terbaik.</p>
+    <!-- Konten Utama -->
+    <div class="flex flex-1">
+        <!-- Kiri: Quote -->
+        <div class="hidden md:flex w-1/2 bg-gray-200 justify-center items-center p-12">
+            <div class="max-w-md text-center">
+                <h2 class="text-3xl font-bold mb-4 text-gray-700">Selamat datang pada web pendaftaran siswa baru</h2>
+                <p class="text-sm text-gray-500">Silakan isi formulir di samping untuk mendaftarkan diri.</p>
             </div>
         </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white text-center py-4 mt-10">
-        <p>&copy; 2025 WebsiteKu. Semua Hak Dilindungi.</p>
-    </footer>
+        <!-- Kanan: Form -->
+        <div class="w-full md:w-1/2 flex items-center justify-center p-8">
+            <div class="w-full max-w-md bg-white rounded-lg shadow-md p-8">
+                <h2 class="text-2xl font-bold text-center mb-6">Form Pendaftaran Siswa</h2>
+                @if (session('success'))
+                    <div class="mb-4 rounded-lg border border-green-200 bg-green-50 p-4 text-green-800">
+                        <div class="flex items-center gap-2">
+                            <!-- Icon -->
+                            <svg class="h-5 w-5 text-green-500" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span class="font-medium">Berhasil:</span>
+                            <span>{{ session('success') }}</span>
+                        </div>
+                    </div>
+                @endif
 
+
+                <form method="POST" action="{{ route('siswa.store') }}">
+                    @csrf
+
+                    <!-- Nama Lengkap -->
+                    <div class="mb-4">
+                        <label class="block mb-1 text-sm font-medium">Nama Lengkap</label>
+                        <input type="text" name="name"
+                            class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                            required>
+                    </div>
+
+                    <!-- NISN -->
+                    <div class="mb-4">
+                        <label class="block mb-1 text-sm font-medium">NISN</label>
+                        <input type="text" name="NISN"
+                            class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                            required>
+                    </div>
+
+                    <!-- Jenis Kelamin -->
+                    <div class="mb-4">
+                        <label class="block mb-1 text-sm font-medium">Jenis Kelamin</label>
+                        <select name="Jenis_Kelamin"
+                            class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                            <option value="Laki-Laki">Laki-Laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                        </select>
+                    </div>
+
+                    <!-- Alamat -->
+                    <div class="mb-4">
+                        <label class="block mb-1 text-sm font-medium">Alamat</label>
+                        <textarea name="alamat" rows="3"
+                            class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400" required></textarea>
+                    </div>
+
+                    <!-- Sekolah Asal -->
+                    <div class="mb-4">
+                        <label class="block mb-1 text-sm font-medium">Sekolah Asal</label>
+                        <input type="text" name="Sekolah_Asal"
+                            class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                            required>
+                    </div>
+
+                    <!-- Status Pendaftaran (Disembunyikan) -->
+                    <input type="hidden" name="Status_Pendaftaran" value="Cadangan">
+
+                    <!-- Tombol -->
+                    <button type="submit"
+                        class="w-full py-3 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition">
+                        Daftar Sekarang
+                    </button>
+                </form>
+
+                <p class="text-center text-sm mt-4 text-gray-600">
+                    Sudah punya akun?
+                    <a href="/login" class="text-indigo-500 hover:underline">Login</a>
+                </p>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>

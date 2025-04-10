@@ -14,7 +14,6 @@
             <ul class="space-y-2">
                 <li><a href="/dashboard" class="block p-2 hover:bg-blue-700 rounded">Dashboard</a></li>
                 <li><a href="/admin/user" class="block p-2 hover:bg-blue-700 rounded">Kelola User</a></li>
-                <li><a href="/admin/petugas" class="block p-2 hover:bg-blue-700 rounded">Kelola Petugas</a></li>
                 <li><a href="/logout" class="block p-2 hover:bg-red-700 rounded">Logout</a></li>
             </ul>
         </nav>
